@@ -6,6 +6,38 @@
 
 ![功能演示](assets/demo_segment.gif)
 
+**项目结构**
+```
+mimicry-demo/
+├── README.md                            # 项目说明文档
+├── config/                              # 项目配置目录
+│   ├── boxes_config/                    # 三框静态配置
+│   │   ├── pad_boxes_config.json        # Pad 工位三框配置
+│   │   └── phone_boxes_config.json      # Phone 工位三框配置
+│   ├── data_config/                     # 数据集 YAML 配置
+│   │   └── mimicry_20260121_data.yaml   # 类别与路径定义
+│   └── video_extractor_config/          # 视频提取工具配置
+│       └── extractor_config.json        # 工具默认配置
+├── frame_images/                        # Boxes 标注与样例数据
+│   ├── pad/                             # Pad 工位样例
+│   │   ├── classes.txt                  # 类别清单
+│   │   ├── pad_XXX.jpg                  # 首帧图像
+│   │   └── pad_XXX.txt                  # YOLO 标注
+│   └── phone/                           # Phone 工位样例
+│       ├── classes.txt                  # 类别清单
+│       ├── phone_XXX.jpg                # 首帧图像
+│       └── phone_XXX.txt                # YOLO 标注
+├── demo_pad_glass.py                    # Pad 工位推理与业务逻辑
+├── demo_phone_glass.py                  # Phone 工位推理与业务逻辑
+├── generate_boxes_config.py             # 从标注生成三框配置
+├── requirements.txt                     # 依赖清单
+├── video_frame_extractor.py             # 视频首帧提取工具
+└── videos/                              # 推理视频输入目录
+    └── raw/                             # 原始输入视频
+        ├── pad-glass-XXX.avi            # Pad 工位示例视频
+        └── phone-glass-XXX.avi          # Phone 工位示例视频
+```
+
 **当前架构与功能说明**
 - 自动识别任务周期的开始/结束（统一采用 Hand 与 Box_IN 的 IoM 阈值触发）
 - 统计周期内的横向/纵向时长（宽高比判定）
@@ -102,38 +134,6 @@ python video_frame_extractor.py --config config/video_extractor_config/extractor
 - hand_glass_threshold：IoM 阈值（默认 0.6）
 - box_ratio：横/纵判断的宽高比阈值（默认 0.9）
 - MIN_CYCLE_FRAMES：最短周期帧数（默认 fps*3.0）
-
-**项目结构**
-```
-mimicry-demo/
-├── README.md                            # 项目说明文档
-├── config/                              # 项目配置目录
-│   ├── boxes_config/                    # 三框静态配置
-│   │   ├── pad_boxes_config.json        # Pad 工位三框配置
-│   │   └── phone_boxes_config.json      # Phone 工位三框配置
-│   ├── data_config/                     # 数据集 YAML 配置
-│   │   └── mimicry_20260121_data.yaml   # 类别与路径定义
-│   └── video_extractor_config/          # 视频提取工具配置
-│       └── extractor_config.json        # 工具默认配置
-├── frame_images/                        # Boxes 标注与样例数据
-│   ├── pad/                             # Pad 工位样例
-│   │   ├── classes.txt                  # 类别清单
-│   │   ├── pad_XXX.jpg                  # 首帧图像
-│   │   └── pad_XXX.txt                  # YOLO 标注
-│   └── phone/                           # Phone 工位样例
-│       ├── classes.txt                  # 类别清单
-│       ├── phone_XXX.jpg                # 首帧图像
-│       └── phone_XXX.txt                # YOLO 标注
-├── demo_pad_glass.py                    # Pad 工位推理与业务逻辑
-├── demo_phone_glass.py                  # Phone 工位推理与业务逻辑
-├── generate_boxes_config.py             # 从标注生成三框配置
-├── requirements.txt                     # 依赖清单
-├── video_frame_extractor.py             # 视频首帧提取工具
-└── videos/                              # 推理视频输入目录
-    └── raw/                             # 原始输入视频
-        ├── pad-glass-XXX.avi            # Pad 工位示例视频
-        └── phone-glass-XXX.avi          # Phone 工位示例视频
-```
 
 **常见问题**
 - 周期无法开始/结束：检查三框坐标与阈值设置是否合理
