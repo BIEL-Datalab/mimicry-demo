@@ -6,6 +6,7 @@
 
 ![功能演示](assets/demo_segment.gif)
 
+
 **项目结构**
 ```
 mimicry-demo/
@@ -63,7 +64,7 @@ python -c "import cv2, ultralytics; print('OK', cv2.__version__)"
 ```
 
 **类别与数据集**
-- 模型类别顺序需与数据集一致：`["Box_OUT", "Box_NG", "Box_IN", "Hand", "Pad_Glass", "Phone_Glass"]`
+- 模型类别顺序需与数据集一致：`["Hand", "Pad_Glass", "Phone_Glass"]`
 - 数据集 YAML 示例（请按本地路径设置）：`d:/3_CODES/_YOLO/YOLO/dataset/mimicry_20260121_data.yaml`
 - 模型权重示例（请按训练输出设置）：`runs/train/<你的实验>/weights/best.pt`
 
